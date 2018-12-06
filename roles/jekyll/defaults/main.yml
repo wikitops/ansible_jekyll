@@ -1,0 +1,12 @@
+---
+
+###
+# JEKYLL
+###
+
+# Jekyll project to download
+jekyll_git_project_url: ""
+jekyll_git_project_release: ""
+
+# local Jejyll project directory
+jekyll_project_dir: /opt/jekyll

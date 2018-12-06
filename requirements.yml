@@ -1,0 +1,3 @@
+- src: git+https://github.com/wikitops/ansible_ruby
+  version: "1.0"
+  name: ruby

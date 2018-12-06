@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Jekyll service
+After=syslog.target network.target
+
+[Service]
+User=root
+Type=simple
+WorkingDirectory={{ jekyll_project_dir }}
+ExecStart=/usr/local/bin/jekyll serve  --host={{ hostvars[groups['jekyll'][0]].ip }} --watch --source "{{ jekyll_project_dir }}"
+ExecStop=/usr/bin/pkill -f jekyll
+Restart=always
+TimeoutStartSec=60
+RestartSec=60
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=jekyll
+
+[Install]
+WantedBy=multi-user.target network-online.target

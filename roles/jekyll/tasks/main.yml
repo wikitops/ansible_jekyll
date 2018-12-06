@@ -1,0 +1,24 @@
+---
+
+- when: jekyll_git_project_url is defined and jekyll_git_project_url != ''
+  block:
+
+    - name: JEKYLL | Get source project from Git repository
+      git:
+        repo: "{{ jekyll_git_project_url }}"
+        dest: "{{ jekyll_project_dir }}"
+        version: "{{ jekyll_git_project_release }}"
+
+    - name: JEKYLL | Install Ruby Gems
+      bundler:
+        state: latest
+        chdir: "{{ jekyll_project_dir }}"
+
+    - name: JEKYLL | Serve with Systemd
+      template:
+        src: lib/systemd/system/jekyll.service.j2
+        dest: /lib/systemd/system/jekyll.service
+        owner: root
+        group: root
+        mode: 0644
+      notify: Restart jekyll

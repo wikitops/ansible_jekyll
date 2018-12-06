@@ -1,0 +1,10 @@
+---
+
+- hosts: jekyll
+  remote_user: vagrant
+  become: yes
+  vars:
+    jekyll_git_project_url: ""
+    jekyll_git_project_release: ""
+  roles:
+    - jekyll
